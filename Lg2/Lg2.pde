@@ -51,7 +51,7 @@ class cell {
   }
 }
 
-cell[][] now, next;
+cell[][] now;
 int ROWS = 40;
 int COLS = 40;
 
@@ -62,11 +62,9 @@ void setup() {
   size(1000, 1000, P3D);
   
   now = new cell[COLS][ROWS];
-  next = new cell[COLS][ROWS];
   for (int i = 0; i < ROWS; i++) {
     for (int j = 0; j < COLS; j++) {
       now[i][j] = new cell(i, j);
-      next[i][j] = new cell(i, j);
     }
   }
   
@@ -92,19 +90,13 @@ void updategen() {
         if (c) lc++;
       }
 
-      if (!now[i][j].IsAlive && lc==3)next[i][j].IsChanging=true; //Death to alive.
-      else if (now[i][j].IsAlive && (lc==2 || lc==3)) next[i][j].IsChanging=false; //Keep alive.
-      else if (now[i][j].IsAlive)next[i][j].IsChanging = true; //Alive to death.
-      else next[i][j].IsChanging = false; //Keep death.
+      if (!now[i][j].IsAlive && lc==3)now[i][j].IsChanging=true; //Death to alive.
+      else if (now[i][j].IsAlive && (lc==2 || lc==3)) now[i][j].IsChanging=false; //Keep alive.
+      else if (now[i][j].IsAlive)now[i][j].IsChanging = true; //Alive to death.
+      else now[i][j].IsChanging = false; //Keep death.
     }
   }  
-
-  //Copy.
-  for (int i=0; i < ROWS; i++) {
-    for (int j=0; j < COLS; j++) {
-      now[i][j].IsChanging = next[i][j].IsChanging;
-    }
-  }
+  
 }
 
 
