@@ -60,7 +60,7 @@ void setup() {
   ctime = millis() - ltime;
   frameRate(30);
   size(1000, 1000, P3D);
-  perspective(45, float(width)/float(height), 1.0, 1000.0);
+  
   now = new cell[COLS][ROWS];
   next = new cell[COLS][ROWS];
   for (int i = 0; i < ROWS; i++) {
@@ -69,6 +69,7 @@ void setup() {
       next[i][j] = new cell(i, j);
     }
   }
+  
   ltime = millis();
 };
 
@@ -117,7 +118,7 @@ void draw() {
   }
 
   isupdategen=true;
-  
+  perspective(45, float(width)/float(height), 1.0, 1000.0);
   camera(0, 100, 100, 0, 0, 0, 0, 1, 0);
   translate(-20, 45, 60); //Center.
   beginCamera();
